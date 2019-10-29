@@ -8,6 +8,7 @@ import {
   Animated,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  Dimensions,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ActionButtonItem from './ActionButtonItem';
@@ -34,6 +35,8 @@ const alignMap = {
     endDegree: 270,
   },
 };
+
+const { height } = Dimensions.get('window')
 
 export default class ActionButton extends Component {
 
@@ -154,14 +157,14 @@ export default class ActionButton extends Component {
 
     return (
       <Animated.Text
-        style={[styles.btnText,
+        style={[this.props.tab?styles.btnIcon:styles.btnText,
                 {
                   color: this.state.anim.interpolate({
                     inputRange: [0, 1],
                     outputRange: [this.props.buttonTextColor, this.props.btnOutRangeTxt]
                   })
                 }]}>
-        +
+        {this.props.tab?this.props.tab:'+'}
       </Animated.Text>
     );
   }
@@ -306,7 +309,11 @@ const styles = StyleSheet.create({
   },
   actionContainer: {
     flexDirection: 'column',
-    padding: 10,
+    // padding: 10,
+
+    /*--- Custom Positioning ---*/
+    paddingRight: 10,
+    paddingBottom: height* 0.07,
   },
   actionBarItem: {
     alignItems: 'center',
@@ -314,6 +321,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   btn: {
+    backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
     shadowOpacity: 0.3,
@@ -326,6 +334,12 @@ const styles = StyleSheet.create({
   },
   btnText: {
     marginTop: -4,
+    fontSize: 24,
+    backgroundColor: 'transparent',
+    position: 'relative',
+  },
+  btnIcon: {
+    marginTop: 3,
     fontSize: 24,
     backgroundColor: 'transparent',
     position: 'relative',

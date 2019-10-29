@@ -44,7 +44,7 @@ export default class ActionButtonItem extends Component {
           ]
         }]}
       >
-        <TouchableOpacity style={{flex:1}} activeOpacity={this.props.activeOpacity || 0.85} onPress={this.props.onPress}>
+        <TouchableOpacity style={{flex:1, opacity:0.2}} activeOpacity={this.props.activeOpacity || 0.65} onPress={this.props.onPress}>
           <View
             style={[styles.actionButton,{
               width: this.props.size,
@@ -52,9 +52,17 @@ export default class ActionButtonItem extends Component {
               borderRadius: this.props.size / 2,
               backgroundColor: this.props.buttonColor,
             }]}
-          >
-            {this.props.children}
-          </View>
+          />
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={this.props.activeOpacity || 0.1} onPress={this.props.onPress}
+            style={[styles.actionButton,{
+              width: this.props.size,
+              height: this.props.size,
+              borderRadius: this.props.size / 2,
+              backgroundColor: 'transparent',
+            }]}
+        >
+        {this.props.children}
         </TouchableOpacity>
       </Animated.View>
     );
