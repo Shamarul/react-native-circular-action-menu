@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ActionButtonItem from './ActionButtonItem';
+import * as Animatable from 'react-native-animatable';
 
 const alignMap = {
   center: {
@@ -104,8 +105,10 @@ export default class ActionButton extends Component {
 
   renderButton() {
     return (
-      <View
+      <Animatable.View
         style={this.getActionButtonStyle()}
+        animation={this.props.animate}
+        iterationCount={1}
       >
         <TouchableOpacity
           activeOpacity={0.85}
@@ -146,7 +149,7 @@ export default class ActionButton extends Component {
             {this.renderButtonIcon()}
           </Animated.View>
         </TouchableOpacity>
-      </View>
+      </Animatable.View>
     );
   }
 
@@ -313,7 +316,7 @@ const styles = StyleSheet.create({
 
     /*--- Custom Positioning ---*/
     paddingRight: 10,
-    paddingBottom: height* 0.07,
+    paddingBottom: height* 0.08,
   },
   actionBarItem: {
     alignItems: 'center',
